@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/addCarFragment"
-        android:name="com.drping.zotcartest.AddCarFragment"
+        android:name="com.drping.zotcartest.main.AddCarFragment"
         android:label="fragment_add_car"
         tools:layout="@layout/fragment_add_car" />
     <fragment
         android:id="@+id/listCarFragment"
-        android:name="com.drping.zotcartest.ListCarFragment"
+        android:name="com.drping.zotcartest.main.ListCarFragment"
         android:label="fragment_list_car"
         tools:layout="@layout/fragment_list_car" />
 </navigation>
