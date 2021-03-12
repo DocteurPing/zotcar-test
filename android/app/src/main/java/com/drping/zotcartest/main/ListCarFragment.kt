@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.drping.zotcartest.R
+import com.drping.zotcartest.entity.Car
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +25,7 @@ class ListCarFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +39,20 @@ class ListCarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list_car, container, false)
+
+        val rootView: View = inflater.inflate(R.layout.fragment_list_car, container, false)
+        recyclerView = rootView.findViewById<View>(R.id.recycler_view) as RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+        // TEST
+        val list = ArrayList<Car>()
+        val car1 = Car("peugeot", "208", "az-123-az", "essence", "5", "5", "neuve", "null")
+        val car2 = Car("citroen", "c4", "az-123-az", "essence", "5", "5", "neuve", "null")
+        list.add(car1)
+        list.add(car2)
+        recyclerView.adapter = ListCarAdapter(list)
+        return rootView
+
     }
 
     companion object {

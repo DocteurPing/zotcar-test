@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.drping.zotcartest.R
 import com.drping.zotcartest.entity.Car
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity(), MainActivityContract.View {
 
     private lateinit var presenter: MainActivityPresenter
-    private lateinit var cars: List<Car>
+    private var cars: List<Car> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +31,5 @@ class MainActivity : AppCompatActivity(), MainActivityContract.View {
 
     override fun setCars(list: List<Car>) {
         cars = list
-        findViewById<RecyclerView>(R.id.recycler_view).apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ListCarAdapter(cars)
-        }
     }
 }
