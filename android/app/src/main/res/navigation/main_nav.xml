@@ -14,5 +14,14 @@
         android:id="@+id/listCarFragment"
         android:name="com.drping.zotcartest.main.ListCarFragment"
         android:label="fragment_list_car"
-        tools:layout="@layout/fragment_list_car" />
+        tools:layout="@layout/fragment_list_car">
+        <action
+            android:id="@+id/action_listCarFragment_to_carDetail2"
+            app:destination="@id/carDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/carDetail"
+        android:name="com.drping.zotcartest.main.CarDetail"
+        android:label="fragment_car_detail"
+        tools:layout="@layout/fragment_car_detail"></fragment>
 </navigation>

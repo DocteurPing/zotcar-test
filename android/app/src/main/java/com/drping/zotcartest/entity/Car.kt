@@ -1,5 +1,7 @@
 package com.drping.zotcartest.entity
 
+import java.io.Serializable
+
 class Car(
     val brand: String,
     val model: String,
@@ -9,4 +11,4 @@ class Car(
     val door: String,
     val desc: String,
     val image: String
-)
+) : Serializable
