@@ -4,8 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.android.volley.Request
 import com.drping.zotcartest.R
+import com.drping.zotcartest.tools.VolleyRequest
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +40,38 @@ class AddCarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_car, container, false)
+        val rootView: View = inflater.inflate(R.layout.fragment_add_car, container, false)
+        val button = rootView.findViewById<Button>(R.id.button)
+        button.setOnClickListener {
+            sendCar(rootView)
+        }
+        return rootView
+    }
+
+    private fun sendCar(view: View) {
+        context?.let { VolleyRequest.init(it) }
+        val url = "http://192.168.1.23:5000/images"
+        val volleyRequest = VolleyRequest(url, ::success) {}
+        val header = HashMap<String, String>()
+        val params = HashMap<String, String>()
+        val body = "model=${
+            view.findViewById<EditText>(R.id.model).text
+        }&registration=${
+            view.findViewById<EditText>(R.id.registration).text
+        }&oil=${
+            view.findViewById<EditText>(R.id.oil).text
+        }&seat=${
+            view.findViewById<EditText>(R.id.seat).text
+        }&door=${
+            view.findViewById<EditText>(R.id.doors).text
+        }&desc=${
+            view.findViewById<EditText>(R.id.desc).text
+        }&image=test"
+        volleyRequest.makeRequestToJSON(Request.Method.POST, header, params, body)
+    }
+
+    private fun success(json: String) {
+        Toast.makeText(context, "La voiture a bien été ajouté", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
